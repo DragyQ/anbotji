@@ -503,7 +503,8 @@ if __name__ == "__main__":
     test_data = load_data(test_path)
 
     # Initialize tokenizer and datasets
-    base_model_name = "describeai/gemini"
+    base_model_name = "distilbert-base-uncased"
+    #change to an encoder only pretrained model --> distillbert,  
     tokenizer = AutoTokenizer.from_pretrained(base_model_name)
     train_dataset = PersonalityDataset(train_data, tokenizer)
     dev_dataset = PersonalityDataset(dev_data, tokenizer)
