@@ -1,0 +1,263 @@
+{
+    "instructions": {
+        "general_guidance": [
+            "Please answer questions you are asked in a descriptive manner.",
+            "Please also be sure to restate the question when answering it.",
+            "These will be used to try and predict your personality traits on a scale of 1-7, your age, and your gender, and other relevant characteristics as necessary."
+        ]
+    },
+    "questions": [
+        {
+            "question": "Your friend Anjali made a meal that tastes terrible. How do you respond?",
+            "tests": ["Agreeableness", "Empathetic Concern"]
+        },
+        {
+            "question": "Your friend offers to treat you to dinner. What do you do?",
+            "tests": ["Agreeableness"]
+        },
+        {
+            "question": "Your friend suddenly won't listen to you, when everything was fine yesterday. What happened?",
+            "tests": ["Perspective Taking"]
+        },
+        {
+            "question": "Your friend takes a spectacular fall! What do you do?",
+            "tests": ["Empathetic Concern", "Perspective Taking"]
+        },
+        {
+            "question": "You have a really important test tomorrow! What do you do?",
+            "tests": ["Conscientiousness"]
+        },
+        {
+            "question": "Once you've decided something, do you see it through to the end? Try giving an example.",
+            "tests": ["Conscientiousness"]
+        },
+        {
+            "question": "You've been asked to do a difficult task. What will you do?",
+            "tests": ["Conscientiousness", "Stability"]
+        },
+        {
+            "question": "You're packing your classroom's snacks for a picnic, when you get hungry. What do you do?",
+            "tests": ["Conscientiousness"]
+        },
+        {
+            "question": "You're at a party and you don't know anyone. How do you act in this situation?",
+            "tests": ["Extraversion", "Stability"]
+        },
+        {
+            "question": "Do you like karaoke? Why or why not?",
+            "tests": ["Extraversion"]
+        },
+        {
+            "question": "Do you like lively parties? Why or why not?",
+            "tests": ["Extraversion"]
+        },
+        {
+            "question": "The people at the next table are singing for someone's birthday. What do you do?",
+            "tests": ["Extraversion"]
+        },
+        {
+            "question": "You run into a new person you haven't talked to very much before. What do you do?",
+            "tests": ["Extraversion"]
+        },
+        {
+            "question": "You're about to buy a popular game when someone else gets the last copy! How do you feel?",
+            "tests": ["Stability"]
+        },
+        {
+            "question": "You're on a stroll when a TV crew pounces on you for an interview. What do you do?",
+            "tests": ["Extraversion"]
+        },
+        {
+            "question": "What do you do if you're in class and realize you really need to go to the restroom?",
+            "tests": ["Personal Distress"]
+        },
+        {
+            "question": "You discover a treasure chest in some ruins. What do you do?",
+            "tests": ["Fantasy"]
+        },
+        {
+            "question": "You see a cake that is past its expiration date, but only by one day. What do you do?",
+            "tests": ["Stability"]
+        },
+        {
+            "question": "You're hiking up a mountain when you reach diverging paths. Which kind do you take?",
+            "tests": ["Openness"]
+        },
+        {
+            "question": "Do you think blaming something you did on someone else is sometimes necessary?",
+            "tests": ["Perspective Taking"]
+        },
+        {
+            "question": "Do you think it's important to always aim to be the best?",
+            "tests": ["Conscientiousness"]
+        },
+        {
+            "question": "Do you think it's important to be fashionably late?",
+            "tests": ["Openness"]
+        },
+        {
+            "question": "Have you ever thought that if you dug in your backyard you could find buried treasure?",
+            "tests": ["Fantasy"]
+        },
+        {
+            "question": "You notice that a toy you bought for full price yesterday is marked down to half price today! How do you feel?",
+            "tests": ["Stability"]
+        },
+        {
+            "question": "Are you truly sincere when you apologize?",
+            "tests": ["Agreeableness"]
+        },
+        {
+            "question": "Did you make any New Year's resolutions?",
+            "tests": ["Conscientiousness"]
+        },
+        {
+            "question": "Do you prefer to be busy or to have a lot of free time?",
+            "tests": ["Stability"]
+        },
+        {
+            "question": "Do you prefer to play outside rather than inside?",
+            "tests": ["Openness"]
+        },
+        {
+            "question": "Do you think that, no matter what, life goes on?",
+            "tests": ["Stability"]
+        },
+        {
+            "question": "Do you think you have good study habits?",
+            "tests": ["Conscientiousness"]
+        },
+        {
+            "question": "Do you want to be famous?",
+            "tests": ["Openness"]
+        },
+        {
+            "question": "Do you want to be taller someday?",
+            "tests": ["Perspective Taking"]
+        },
+        {
+            "question": "Everyone around you is laughing hard at something you think is boring. What do you do?",
+            "tests": ["Perspective Taking", "Agreeableness"]
+        },
+        {
+            "question": "Everyone's sharing a dessert, and there's an extra piece. What do you do?",
+            "tests": ["Agreeableness", "Conscientiousness"]
+        },
+        {
+            "question": "Good news and bad news... Which one do you want to hear first?",
+            "tests": ["Stability"]
+        },
+        {
+            "question": "Have you ever blurted something out without thinking about the consequences first?",
+            "tests": ["Stability"]
+        },
+        {
+            "question": "Have you ever forgotten you bought something and bought another one?",
+            "tests": ["Stability"]
+        },
+        {
+            "question": "Have you ever realized you were hogging the conversation?",
+            "tests": ["Perspective Taking"]
+        },
+        {
+            "question": "Have you ever told a joke that just completely fell flat?",
+            "tests": ["Personal Distress"]
+        },
+        {
+            "question": "Hey, what's that? There's someone behind you! So...did you look just now?",
+            "tests": ["Stability"]
+        },
+        {
+            "question": "How are your mornings?",
+            "tests": ["Stability"]
+        },
+        {
+            "question": "The phone's ringing! What do you do?",
+            "tests": ["Stability"]
+        },
+        {
+            "question": "What's your studying style?",
+            "tests": ["Conscientiousness"]
+        },
+        {
+            "question": "When you see a switch, do you feel an overwhelming urge to flip it?",
+            "tests": ["Stability"]
+        },
+        {
+            "question": "You fail miserably! Everyone found out, and they're disappointed in you... What do you do?",
+            "tests": ["Personal Distress", "Stability"]
+        },
+        {
+            "question": "You find something at a great bargain price! What do you do?",
+            "tests": ["Conscientiousness"]
+        },
+        {
+            "question": "You notice your socks are two different colors! What do you do?",
+            "tests": ["Stability"]
+        },
+        {
+            "question": "You want to reveal that you like someone a whole bunch! What do you do?",
+            "tests": ["Extraversion", "Perspective Taking"]
+        },
+        {
+            "question": "Your friends seem to be making plans to hang out, just out of earshot. You think...?",
+            "tests": ["Perspective Taking", "Personal Distress"]
+        },
+        {
+            "question": "You're at a movie theater. What are you there to see?",
+            "tests": ["Openness"]
+        },
+        {
+            "question": "You're eating at a very fancy restaurant known for its food. Which course do you select?",
+            "tests": ["Openness"]
+        },
+        {
+            "question": "You're hiking up a mountain when you reach diverging paths. Which kind do you take?",
+            "tests": ["Openness"]
+        },
+        {
+            "question": "You're in a completely silent assembly when you suddenly hear someone pass gas! How do you react?",
+            "tests": ["Personal Distress"]
+        },
+        {
+            "question": "You're packing your classroom's snacks for a picnic when you get hungry. What do you do?",
+            "tests": ["Conscientiousness"]
+        },
+        {
+            "question": "You're running a marathon, and at the start you fall flat on your face! What will you do?",
+            "tests": ["Stability"]
+        },
+        {
+            "question": "If you could design a completely new planet from scratch, what would it look like?",
+            "tests": ["Fantasy"]
+        },
+        {
+            "question": "You discover a magical door that can transport you to any fictional world. Which world would you choose and why?",
+            "tests": ["Fantasy"]
+        },
+        {
+            "question": "Imagine you've been given the ability to create one impossible invention. What would it be?",
+            "tests": ["Fantasy"]
+        },
+        {
+            "question": "If you could have any superpower that doesn't exist in reality, what would it be and how would you use it?",
+            "tests": ["Fantasy"]
+        },
+        {
+            "question": "You find an old map that supposedly leads to a mythical treasure. What do you imagine the treasure might be?",
+            "tests": ["Fantasy"]
+        },
+        {
+            "question": "How do you respond when a friend or colleague is visibly upset about a situation?",
+            "tests": ["Empathetic Concern"]
+        },
+        {
+            "question": "If you notice someone struggling in a group setting, how do you respond?",
+            "tests": ["Empathetic Concern"]
+        },
+        {
+            "question": "Have you ever adjusted your communication approach with someone based on their emotional state?",
+            "tests": ["Empathetic Concern"]
+        }
+    ]
+}
