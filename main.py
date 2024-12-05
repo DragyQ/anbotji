@@ -74,17 +74,14 @@ def chatbot(model, max_iterations = 9):
             response = chat.send_message(prompt)
             print(f"\nAnbotji: {response.text}")
 
-        if i == max_iterations:
-            break 
-
         # get user response
         user_response = input("You: ")
         user_responses.append(user_response)
 
     # Concatenate all user responses into a single string
-    final_user_response = " ".join(user_responses)
+    final_user_response = " ".join(user_responses[1:])
     return final_user_response
 
 # Run the chatbot
 if __name__ == "__main__":
-    chatbot(model, 5)
+    essay = chatbot(model)
