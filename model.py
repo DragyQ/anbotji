@@ -1,15 +1,18 @@
 import torch
 from transformers import AutoTokenizer, AutoModel
 from typing import Dict
+import os
 
 
-BASE_MODEL_NAME = "distilbert_base_uncased"
+BASE_MODEL_NAME = "distilbert-base-uncased"
 
 class PersonalityPredictionModel(torch.nn.Module):
-    def __init__(self, base_model_name: str=BASE_MODEL_NAME):
+    def __init__(self, base_model_name: str = BASE_MODEL_NAME):
+        super().__init__()
+        
         # Load pre-trained model
-        self.model = AutoModel.from_pretrained(base_model_name)
-        hidden_size = self.model.config.hidden_size
+        self.base_model = AutoModel.from_pretrained(base_model_name)
+        hidden_size = self.base_model.config.hidden_size
         
         # Fully connected layers
         self.fc_text = torch.nn.Linear(hidden_size, 16)
@@ -19,10 +22,11 @@ class PersonalityPredictionModel(torch.nn.Module):
         # Output layers
         self.fc_out_personality = torch.nn.Linear(40, 5)
         self.fc_out_iri = torch.nn.Linear(40, 4)
+
     
     def forward(self, input_ids, attention_mask, demographics, empathy_distress):
         # Extract text features
-        base_output = self.model(input_ids=input_ids, attention_mask=attention_mask)
+        base_output = self.base_model(input_ids=input_ids, attention_mask=attention_mask)
         text_features = base_output.last_hidden_state[:, 0, :]  # CLS token representation
         text_features = self.fc_text(text_features)
         
@@ -39,24 +43,22 @@ class PersonalityPredictionModel(torch.nn.Module):
         
         return personality_output, iri_output
 
-
-
-# Loading tokenizer and model.
+# Load tokenizer and model
 tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL_NAME)
 model = PersonalityPredictionModel()
 
-# Loading our weights
-model.load_state_dict(
-    torch.load("model_weights.pth", map_location=torch.device("cpu"))
-)
-model.eval()
+# Load checkpoint weights
+state_dict = torch.load("model_weights.pth", map_location=torch.device("cpu"))
+model.load_state_dict(state_dict, strict=False)  # Allow non-strict matching
 
+# Clear warning printed out in terminal.
+os.system('cls' if os.name == 'nt' else 'clear')
 
 def predict_outputs(essay: str, demographic_labels: Dict, empathy_distress_labels: Dict[str, str]):
     input = tokenizer(
         text=essay,
         truncation=True,
-        max_length=128,
+        max_length=1024,
         padding="max_length",
         return_tensors="pt"
     )
