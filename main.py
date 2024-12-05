@@ -1,4 +1,6 @@
 from dotenv import load_dotenv
+from questions_parser import PersonalityAssessmentParser
+from random import choice
 import os
 import google.generativeai as genai
 
@@ -7,17 +9,35 @@ load_dotenv()
 API_KEY = os.getenv('gemini_api_key')
 
 genai.configure(api_key=API_KEY)
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel(
+    "gemini-1.5-flash",
+    system_instruction="You are an interactive bot named Anbotji. Users will converse with you, while"
+    "you will be given a list of questions to ask them. Ask them one question at a time."
+)
+
+# Get random questions to ask user.
+parser = PersonalityAssessmentParser("questions.json")
+
+def get_questions():
+    questions = []
+    
+    for test_type in parser.get_test_types():
+        choices = parser.get_questions_by_test_type(test_type)
+        q = choice(choices)
+        
+        # Reselect question if we already chose it before for a diff
+        # test type.
+        while q in questions and len(choices) != 0:
+            choices.remove(q)
+            q = choice(choices)
+        
+        questions.append(q.get('question', ''))
+    
+    return questions
 
 # Returns the concatenated user response after the interaction is over
-def chatbot(model, max_iterations = 5):
-    # TODO: replace this with parser
-    questions = [
-        "What are your hobbies?",
-        "How do you usually spend your weekends?",
-        "What do you value most in a friendship?",
-        "Can you describe your ideal vacation?"
-    ]
+def chatbot(model, max_iterations = 9):
+    questions = get_questions()
 
     context = 'I am Anbotji, a AI chatbot that asks the user certain questions as well as responding to their previous answers to simulate a normal conversation'
     prompt_context = 'Connect the previous user response with the next question you are about to ask to the user in a natural way'
@@ -41,8 +61,8 @@ def chatbot(model, max_iterations = 5):
         if i == 0:
             print(f"\nAnbotji: {initial_question}\n")
         else:
-            # TODO: select a random question (for now it's sequential)
-            question = '' if i == max_iterations else questions[i - 1]
+            question = choice(questions)
+            questions.remove(question)
 
             # get the last user response
             last_user_resp = user_responses[-1]
@@ -67,4 +87,4 @@ def chatbot(model, max_iterations = 5):
 
 # Run the chatbot
 if __name__ == "__main__":
-    chatbot(model, 2)
+    chatbot(model, 5)
