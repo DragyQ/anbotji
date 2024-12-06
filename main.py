@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 from questions_parser import PersonalityAssessmentParser
 from random import choice
 from typing import Tuple, Dict
-from helper import get_input, race_map, gender_map, education_map, PERSONALITY_TRAITS, IRI_TRAITS
+from helper import get_input, race_map, gender_map, education_map, PERSONALITY_TRAITS, IRI_TRAITS, get_iri_trait_ans, get_tipi_trait_ans
 from model import predict_outputs
 
 import os
@@ -162,10 +162,10 @@ def chatbot(model, max_iterations = 5):
     personality, iri = predict_outputs(final_user_response, demographics, empathy_distress)
     
     for trait, output in zip(PERSONALITY_TRAITS, personality.flatten()):
-        print(f"{trait}: {round(output.item(), 3)}")
+        print(get_tipi_trait_ans(round(output.item(), 3), trait))
     
     for trait, output in zip(IRI_TRAITS, iri.flatten()):
-        print(f"{trait}: {round(output.item(), 3)}")
+        print(get_iri_trait_ans(round(output.item(), 3), trait))
     
 
 # Run the chatbot
