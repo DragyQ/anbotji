@@ -73,7 +73,7 @@ class PersonalityDataset(Dataset):
         #Empathy and distress (these are numeric, so we can directly convert them)
         # empathy_score = torch.tensor(labels['empathy'], dtype=torch.float32)
         # distress_score = torch.tensor(labels['distress'], dtype=torch.float32)
-
+        # empathy and distree as one tensor
         empathy_distress = torch.tensor([labels['empathy'],labels['distress']], dtype=torch.float32)
 
 
