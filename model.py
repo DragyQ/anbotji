@@ -58,7 +58,7 @@ def predict_outputs(essay: str, demographic_labels: Dict, empathy_distress_label
     input = tokenizer(
         text=essay,
         truncation=True,
-        max_length=1024,
+        max_length=512,
         padding="max_length",
         return_tensors="pt"
     )

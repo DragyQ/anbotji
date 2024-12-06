@@ -95,7 +95,7 @@ def get_context() -> Tuple[str, Dict[str, str], Dict[str, float]]:
     return name, demographic_info, empathy_distress_info
 
 # Returns the concatenated user response after the interaction is over
-def chatbot(model, max_iterations = 9):
+def chatbot(model, max_iterations = 5):
     print(
         "Hello, I am Anbotji! Nice to meet you : )\n"
         "Let's start our conversation by learning more about you!"
@@ -170,4 +170,4 @@ def chatbot(model, max_iterations = 9):
 
 # Run the chatbot
 if __name__ == "__main__":
-    chatbot(model, 9)
+    chatbot(model, 5)
