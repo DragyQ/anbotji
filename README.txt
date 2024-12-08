@@ -1,4 +1,4 @@
-#Welcome to Anbotji ;)
+# Welcome to Anbotji ;)
 
 This repository contains the code and resources for our project on personality prediction, where a machine learning model was trained to predict personality traits from textual input and integrated into a chatbot for real-time use. 
 
