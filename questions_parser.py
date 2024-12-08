@@ -51,6 +51,19 @@ class PersonalityAssessmentParser:
                 test_counts[test_type] = test_counts.get(test_type, 0) + 1
         return test_counts
     
+    def get_test_types(self) -> List[str]:
+        """
+        Get a list of each test type across all questions
+        
+        :return: List of all unique test types
+        """
+        test_types = []
+        for question in self.get_questions():
+            for test_type in question.get('tests', []):
+                if test_type not in test_types:
+                    test_types.append(test_type)
+        return test_types
+    
     def generate_assessment_report(self) -> str:
         """
         Generate a summary report of the assessment questions

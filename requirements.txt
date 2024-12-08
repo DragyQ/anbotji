@@ -1,0 +1,7 @@
+python-dotenv
+google.generativeai
+torch
+transformers
+scikit-learn
+tqdm
+matplotlib
