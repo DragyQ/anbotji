@@ -527,112 +527,6 @@ class Trainer():
 
         self.plot_metrics()
     
-class Tester():  #Currently not using this function because evaluation is used for testing purpose
-    def __init__(self, model, device):
-        self.model = model  # The model to be trained
-        self.device = device  # The device to run the training (e.g., 'cuda' for GPU, 'cpu' for CPU)
-        # Moving the model to the selected device
-        self.model.to(self.device)
-
-    def test(self, data_loader):
-        # testing function
-        self.model.eval()  # Set model to evaluation/testing mode
-
-        # Initialize variables to keep track of metrics and loss
-        total_mae_personality = 0
-        total_mse_personality = 0
-        total_mae_iri = 0
-        total_mse_iri = 0
-        total_precision_emotions = 0
-        total_recall_emotions = 0
-        total_f1_emotions = 0
-        total_loss = 0
-
-        # Loop over each batch in the data loader
-        with torch.no_grad():
-            for batch_idx, batch in enumerate(tqdm(data_loader)):
-
-                # Move data to the correct device (e.g., GPU)
-                input_ids = batch['input_ids'].to(self.device)
-                attention_mask = batch['attention_mask'].to(self.device)
-                demographics = batch['demographics'].to(self.device)
-                empathy_distress = batch['empathy_distress'].to(self.device)
-                personality_targets = batch['personality'].to(self.device)
-                iri_targets = batch['iri'].to(self.device)
-                emotion_targets = batch['emotion'].to(self.device)
-
-                # applying the model
-                personality_output, iri_output, emotions_output = self.model(input_ids, attention_mask, demographics, empathy_distress)
-
-                loss_function_regression = nn.MSELoss()
-
-                # Compute the losses for each output (personality, IRI, emotions)
-                loss_personality = loss_function_regression(personality_output, personality_targets)
-                loss_iri = loss_function_regression(iri_output, iri_targets)
-                loss_emotions = self.loss_function(emotions_output, emotion_targets)
-
-                # Combine all the losses
-                loss = loss_personality + loss_iri + loss_emotions
-                total_loss += loss.item() # loss is not back propagated here
-
-                #computing argmax and then applying numpy
-                personality_preds = torch.argmax(personality_output, dim=1).detach().cpu().numpy()
-                iri_preds = torch.argmax(iri_output, dim=1).detach().cpu().numpy()
-                emotions_preds = torch.argmax(emotions_output, dim=1).detach().cpu().numpy()
-
-                personality_targets_np = personality_targets.detach().cpu().numpy()
-                iri_targets_np = iri_targets.detach().cpu().numpy()
-                emotion_targets_np = emotion_targets.detach().cpu().numpy()
-
-                # Mean Absolute Error and Mean Squared Error for personality
-                mae_personality = mean_absolute_error(personality_targets_np, personality_preds)
-                mse_personality = mean_squared_error(personality_targets_np, personality_preds)
-
-                # Mean Absolute Error and Mean Squared Error for IRI
-                mae_iri = mean_absolute_error(iri_targets_np, iri_preds)
-                mse_iri = mean_squared_error(iri_targets_np, iri_preds)
-
-                # Calculate metrics for emotions
-                precision_emotions = precision_score(emotion_targets_np, emotions_preds, average='macro', zero_division=0)
-                recall_emotions = recall_score(emotion_targets_np, emotions_preds, average='macro', zero_division=0)
-                f1_emotions = f1_score(emotion_targets_np, emotions_preds, average='macro', zero_division=0)
-
-                # Accumulate metrics for averaging later
-                total_mae_personality += mae_personality
-                total_mse_personality += mse_personality
-                total_mae_iri += mae_iri
-                total_mse_iri += mse_iri
-
-                total_precision_emotions += precision_emotions
-                total_recall_emotions += recall_emotions
-                total_f1_emotions += f1_emotions
-
-        # Average metrics for the entire evaluation
-        num_batches = len(data_loader)
-        avg_loss = total_loss / num_batches
-
-        avg_mae_personality = total_mae_personality / num_batches
-        avg_mse_personality = total_mse_personality / num_batches
-        avg_mae_iri = total_mae_iri / num_batches
-        avg_mse_iri = total_mse_iri / num_batches
-
-        avg_precision_emotions = total_precision_emotions / num_batches
-        avg_recall_emotions = total_recall_emotions / num_batches
-        avg_f1_emotions = total_f1_emotions / num_batches
-
-        return avg_mae_personality, avg_mse_personality, avg_mae_iri, avg_mse_iri, avg_precision_emotions, avg_recall_emotions, avg_f1_emotions, avg_loss
-
-    def execute(self):
-        # Testing loop
-        epochs = 5
-        for epoch in range(epochs):
-           avg_mae_personality, avg_mse_personality, avg_mae_iri, avg_mse_iri, precision_emotions_test, recall_emotions_test, f1_emotions_test, test_loss = self.test(test_loader)
-           print(f"Epoch {epoch+1}: Dev Loss: {test_loss:.4f}")
-           print(f"Personality -> MAE: {avg_mae_personality:.4f}, MSE: {avg_mse_personality:.4f}")
-           print(f"IRI -> MAE: {avg_mae_iri:.4f}, MSE: {avg_mse_iri:.4f}")
-           print(f"Emotions -> Precision: {precision_emotions_test:.4f}, Recall: {recall_emotions_test:.4f}, F1 Score: {f1_emotions_test:.4f}")
-
-
 
 # Main script
 if __name__ == "__main__":
@@ -665,11 +559,8 @@ if __name__ == "__main__":
     optimizer = AdamW(model.parameters(), lr=5e-2, eps=1e-8) # we can try lr = 5e-5 or lower after checking the results of training and evaluation
     loss_fn = nn.CrossEntropyLoss()
     trainer = Trainer(model, optimizer, device, tokenizer, loss_function=loss_fn)
-    trainer.execute()
+    trainer.execute() #performs the training, and evaluation for test set
 
-   # Final testing --> comment this while training and evaluating 
-    tester = Tester(model, device)
-    tester.execute()
 
  
     
