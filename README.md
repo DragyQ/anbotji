@@ -5,7 +5,7 @@ This repository contains the code and resources for our project on personality p
 
 ## Requirements
 All necessary packages and dependencies are listed in requirements.txt.
-To install all required packages, run: pip install -r requirements.txt
+To install all required packages, run: `pip install -r requirements.txt`
 
 ## Dataset 
 The data/ folder contains the raw and processed datasets along with preprocessing scripts:
